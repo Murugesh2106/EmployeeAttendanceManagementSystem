@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Attendance>
+
+    @{
+        ViewData["Title"] = "Attendance Reports";
+    }
+
+
+
+<!-- Dark background with light text -->
+<div class="container-fluid bg-dark text-light min-vh-100 py-4">
+    <h1>Attendance Reports</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary m-2">Create a New Attendance List</a>
+    </p>
+
+    <table class="table table-bordered table-responsive table-hover table-dark">
+        <thead>
+            <tr class="text-center">
+                <th>@Html.DisplayNameFor(model => model.AttendanceId)</th>
+                <th>@Html.DisplayNameFor(model => model.EmployeeId)</th>
+                <th>@Html.DisplayNameFor(model => model.Date)</th>
+                <th>@Html.DisplayNameFor(model => model.CheckInTime)</th>
+                <th>@Html.DisplayNameFor(model => model.CheckOutTime)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var attendance in Model)
+                {
+                    <tr class="text-center">
+                        <td>@Html.DisplayFor(modelItem => attendance.AttendanceId)</td>
+                        <td>@Html.DisplayFor(modelItem => attendance.EmployeeId)</td>
+                        <td>@Html.DisplayFor(modelItem => attendance.Date)</td>
+                        <td>@Html.DisplayFor(modelItem => attendance.CheckInTime)</td>
+                        <td>@Html.DisplayFor(modelItem => attendance.CheckOutTime)</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@attendance.AttendanceId" class="btn btn-primary btn-sm">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@attendance.AttendanceId" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center">No attendance records found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
